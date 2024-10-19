@@ -340,7 +340,7 @@ void ImGuiCocos::renderFrame() const {
 
 
 			j.pos = ImVec2(j.pos.x * uiScale, j.pos.y * uiScale);
-			j.uv = ImVec2(j.uv.x * uiScale, j.uv.y * uiScale);
+			//j.uv = ImVec2(j.uv.x * uiScale, j.uv.y * uiScale);
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, list->VtxBuffer.Size * sizeof(ImDrawVert), list->VtxBuffer.Data, GL_STREAM_DRAW);
@@ -356,8 +356,8 @@ void ImGuiCocos::renderFrame() const {
 			ccGLBindTexture2D(static_cast<GLuint>(textureID));
 
 			const auto rect = cmd.ClipRect;
-			const auto orig = frameToCocos(ImVec2(rect.x * uiScale, rect.y * uiScale));
-			const auto end = frameToCocos(ImVec2(rect.z * uiScale, rect.w * uiScale));
+			const auto orig = frameToCocos(ImVec2(rect.x, rect.y));
+			const auto end = frameToCocos(ImVec2(rect.z, rect.w));
 
 			if (end.x <= orig.x || end.y >= orig.y)
 				continue;
