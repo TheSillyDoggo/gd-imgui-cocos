@@ -188,7 +188,7 @@ void ImGuiCocos::newFrame() {
 	// opengl2 new frame
 	auto* director = CCDirector::sharedDirector();
 	const auto winSize = director->getWinSize();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() * ImGuiCocos::get().getUIScale();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
 
 	// glfw new frame
 	io.DisplaySize = ImVec2(frameSize.width, frameSize.height);
@@ -351,7 +351,7 @@ void ImGuiCocos::renderFrame() const {
 
 			const auto rect = cmd.ClipRect;
 			const auto orig = frameToCocos(ImVec2(rect.x, rect.y));
-			const auto end = frameToCocos(ImVec2(rect.z, rect.w));
+			const auto end = frameToCocos(ImVec2(rect.z * getUIScale(), rect.w * getUIScale()));
 
 			if (end.x <= orig.x || end.y >= orig.y)
 				continue;
