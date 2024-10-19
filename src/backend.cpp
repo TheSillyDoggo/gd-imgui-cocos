@@ -356,8 +356,8 @@ void ImGuiCocos::renderFrame() const {
 			ccGLBindTexture2D(static_cast<GLuint>(textureID));
 
 			const auto rect = cmd.ClipRect;
-			const auto orig = frameToCocos(ImVec2(rect.x, rect.y));
-			const auto end = frameToCocos(ImVec2(rect.z, rect.w));
+			const auto orig = frameToCocos(ImVec2(rect.x * uiScale, rect.y * uiScale));
+			const auto end = frameToCocos(ImVec2(rect.z * uiScale, rect.w * uiScale));
 
 			if (end.x <= orig.x || end.y >= orig.y)
 				continue;

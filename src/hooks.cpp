@@ -112,8 +112,10 @@ class $modify(CCTouchDispatcher) {
 
 		if (!touch) return CCTouchDispatcher::touches(touches, event, type);
 
+		float uiScale = ImGuiCocos::get().getUIScale();
+
 		const auto pos = ImGuiCocos::cocosToFrame(touch->getLocation());
-		io.AddMousePosEvent(pos.x, pos.y);
+		io.AddMousePosEvent(pos.x * uiScale, pos.y * uiScale);
 
 		if (io.WantCaptureMouse || shouldBlockInput()) {
 			if (type == CCTOUCHBEGAN) {
