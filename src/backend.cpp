@@ -138,7 +138,7 @@ void ImGuiCocos::reload() {
 
 ImVec2 ImGuiCocos::cocosToFrame(const CCPoint& pos) {
 	auto* director = CCDirector::sharedDirector();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() / ImGuiCocos::get().getUIScale();
 	const auto winSize = director->getWinSize();
 
 	return {
@@ -149,7 +149,7 @@ ImVec2 ImGuiCocos::cocosToFrame(const CCPoint& pos) {
 
 CCPoint ImGuiCocos::frameToCocos(const ImVec2& pos) {
 	auto* director = CCDirector::sharedDirector();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() / ImGuiCocos::get().getUIScale();
 	const auto winSize = director->getWinSize();
 
 	return {
@@ -188,12 +188,10 @@ void ImGuiCocos::newFrame() {
 	// opengl2 new frame
 	auto* director = CCDirector::sharedDirector();
 	const auto winSize = director->getWinSize();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
-
-	float uiScale = ImGuiCocos::get().getUIScale();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() / ImGuiCocos::get().getUIScale();
 
 	// glfw new frame
-	io.DisplaySize = ImVec2(frameSize.width / uiScale, frameSize.height / uiScale);
+	io.DisplaySize = ImVec2(frameSize.width, frameSize.height);
 	io.DisplayFramebufferScale = ImVec2(
 		winSize.width / frameSize.width,
 		winSize.height / frameSize.height
@@ -206,7 +204,7 @@ void ImGuiCocos::newFrame() {
 
 #ifdef GEODE_IS_DESKTOP
 	const auto mouse = cocosToFrame(geode::cocos::getMousePos());
-	io.AddMousePosEvent(mouse.x * uiScale, mouse.y * uiScale);
+	io.AddMousePosEvent(mouse.x, mouse.y);
 #endif
 
 	auto* kb = director->getKeyboardDispatcher();
@@ -300,8 +298,6 @@ void ImGuiCocos::renderFrame() const {
 	if (!hasVAO || m_forceLegacy)
 		return legacyRenderFrame();
 
-	float uiScale = ImGuiCocos::get().getUIScale();
-
 	auto* drawData = ImGui::GetDrawData();
 
 	const bool hasVtxOffset = ImGui::GetIO().BackendFlags | ImGuiBackendFlags_RendererHasVtxOffset;
@@ -339,10 +335,6 @@ void ImGuiCocos::renderFrame() const {
 		for (auto& j : list->VtxBuffer) {
 			const auto point = frameToCocos(j.pos);
 			j.pos = ImVec2(point.x, point.y);
-
-
-			j.pos = ImVec2(j.pos.x * uiScale, j.pos.y * uiScale);
-			//j.uv = ImVec2(j.uv.x * uiScale, j.uv.y * uiScale);
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, list->VtxBuffer.Size * sizeof(ImDrawVert), list->VtxBuffer.Data, GL_STREAM_DRAW);
