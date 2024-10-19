@@ -298,6 +298,8 @@ void ImGuiCocos::renderFrame() const {
 	if (!hasVAO || m_forceLegacy)
 		return legacyRenderFrame();
 
+	float uiScale = ImGuiCocos::get().getUIScale();
+
 	auto* drawData = ImGui::GetDrawData();
 
 	const bool hasVtxOffset = ImGui::GetIO().BackendFlags | ImGuiBackendFlags_RendererHasVtxOffset;
@@ -335,6 +337,7 @@ void ImGuiCocos::renderFrame() const {
 		for (auto& j : list->VtxBuffer) {
 			const auto point = frameToCocos(j.pos);
 			j.pos = ImVec2(point.x, point.y);
+			j.pos *= uiScale;
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, list->VtxBuffer.Size * sizeof(ImDrawVert), list->VtxBuffer.Data, GL_STREAM_DRAW);
@@ -351,7 +354,7 @@ void ImGuiCocos::renderFrame() const {
 
 			const auto rect = cmd.ClipRect;
 			const auto orig = frameToCocos(ImVec2(rect.x, rect.y));
-			const auto end = frameToCocos(ImVec2(rect.z * getUIScale(), rect.w * getUIScale()));
+			const auto end = frameToCocos(ImVec2(rect.z, rect.w));
 
 			if (end.x <= orig.x || end.y >= orig.y)
 				continue;
