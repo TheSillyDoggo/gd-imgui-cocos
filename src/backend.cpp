@@ -193,7 +193,7 @@ void ImGuiCocos::newFrame() {
 	float uiScale = ImGuiCocos::get().getUIScale();
 
 	// glfw new frame
-	io.DisplaySize = ImVec2(frameSize.width, frameSize.height);
+	io.DisplaySize = ImVec2(frameSize.width / uiScale, frameSize.height / uiScale);
 	io.DisplayFramebufferScale = ImVec2(
 		winSize.width / frameSize.width,
 		winSize.height / frameSize.height
