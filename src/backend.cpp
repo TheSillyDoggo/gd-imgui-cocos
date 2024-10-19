@@ -188,7 +188,7 @@ void ImGuiCocos::newFrame() {
 	// opengl2 new frame
 	auto* director = CCDirector::sharedDirector();
 	const auto winSize = director->getWinSize();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() * getUIScale();
 
 	// glfw new frame
 	io.DisplaySize = ImVec2(frameSize.width, frameSize.height);
@@ -376,4 +376,14 @@ void ImGuiCocos::renderFrame() const {
 	glDeleteVertexArrays(1, &vao);
 
 	glDisable(GL_SCISSOR_TEST);
+}
+
+float ImGuiCocos::getUIScale()
+{
+	return uiScale;
+}
+
+void ImGuiCocos::setUIScale(float v)
+{
+	uiScale = v;
 }

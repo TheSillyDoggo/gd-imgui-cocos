@@ -23,6 +23,8 @@ private:
 	std::function<void()> m_setupCall, m_drawCall;
 	InputMode m_inputMode = InputMode::Default;
 
+	float uiScale = 1.0f;
+
 	ImGuiCocos();
 
 	static void newFrame();
@@ -59,6 +61,9 @@ public:
 
 	[[nodiscard]] bool isInitialized() const;
 	
+	float getUIScale();
+	void setUIScale(float v);
+
 	static ImVec2 cocosToFrame(const cocos2d::CCPoint& pos);
 	static cocos2d::CCPoint frameToCocos(const ImVec2& pos);
 };
