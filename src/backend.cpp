@@ -190,6 +190,8 @@ void ImGuiCocos::newFrame() {
 	const auto winSize = director->getWinSize();
 	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
 
+	float uiScale = ImGuiCocos::get().getUIScale();
+
 	// glfw new frame
 	io.DisplaySize = ImVec2(frameSize.width, frameSize.height);
 	io.DisplayFramebufferScale = ImVec2(
@@ -204,7 +206,7 @@ void ImGuiCocos::newFrame() {
 
 #ifdef GEODE_IS_DESKTOP
 	const auto mouse = cocosToFrame(geode::cocos::getMousePos());
-	io.AddMousePosEvent(mouse.x, mouse.y);
+	io.AddMousePosEvent(mouse.x * uiScale, mouse.y * uiScale);
 #endif
 
 	auto* kb = director->getKeyboardDispatcher();
