@@ -337,7 +337,7 @@ void ImGuiCocos::renderFrame() const {
 		for (auto& j : list->VtxBuffer) {
 			const auto point = frameToCocos(j.pos);
 			j.pos = ImVec2(point.x, point.y);
-			j.pos *= uiScale;
+			j.pos = ImVec2(j.pos.x * uiScale, j.pos.y * uiScale);
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, list->VtxBuffer.Size * sizeof(ImDrawVert), list->VtxBuffer.Data, GL_STREAM_DRAW);
