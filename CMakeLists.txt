@@ -42,5 +42,5 @@ if (NOT HAS_IMGUI)
     set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build FreeType as a static library" FORCE)
 
     target_include_directories(imgui-cocos INTERFACE ${freetype2_SOURCE_DIR}/include)
-    target_link_libraries(imgui-cocos INTERFACE freetype2)
+    target_link_libraries(imgui-cocos INTERFACE freetype)
 endif()
