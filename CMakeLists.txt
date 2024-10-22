@@ -38,7 +38,9 @@ if (NOT HAS_IMGUI)
     )
 
     CPMAddPackage("gh:freetype/freetype2#0ae7e60")
-    target_include_directories(imgui-cocos INTERFACE ${freetype2_SOURCE_DIR}/include)
 
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build FreeType as a static library" FORCE)
+
+    target_include_directories(imgui-cocos INTERFACE ${freetype2_SOURCE_DIR}/include)
     target_link_libraries(imgui-cocos INTERFACE freetype2)
 endif()
