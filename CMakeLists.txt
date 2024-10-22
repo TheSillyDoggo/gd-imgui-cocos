@@ -34,13 +34,13 @@ if (NOT HAS_IMGUI)
         ${imgui_SOURCE_DIR}/imgui_draw.cpp
         ${imgui_SOURCE_DIR}/imgui_demo.cpp
         ${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp
-        ${imgui_SOURCE_DIR}/misc/freetype/imgui_freetype.cpp
+        # ${imgui_SOURCE_DIR}/misc/freetype/imgui_freetype.cpp
     )
 
-    CPMAddPackage("gh:freetype/freetype2#0ae7e60")
+    # CPMAddPackage("gh:freetype/freetype2#0ae7e60")
 
-    set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build FreeType as a static library" FORCE)
+    # set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build FreeType as a static library" FORCE)
 
-    target_include_directories(imgui-cocos INTERFACE ${freetype2_SOURCE_DIR}/include)
-    target_link_libraries(imgui-cocos INTERFACE freetype)
+    # target_include_directories(imgui-cocos INTERFACE ${freetype2_SOURCE_DIR}/include)
+    # target_link_libraries(imgui-cocos INTERFACE freetype)
 endif()
