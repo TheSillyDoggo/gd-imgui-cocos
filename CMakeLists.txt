@@ -23,6 +23,8 @@ if (NOT HAS_IMGUI)
 
     CPMAddPackage("gh:ocornut/imgui#${IMGUI_VERSION}")
 
+    add_definitions(-DIMGUI_ENABLE_FREETYPE)
+
     target_include_directories(imgui-cocos INTERFACE ${imgui_SOURCE_DIR})
 
     target_sources(imgui-cocos INTERFACE
@@ -32,5 +34,8 @@ if (NOT HAS_IMGUI)
         ${imgui_SOURCE_DIR}/imgui_draw.cpp
         ${imgui_SOURCE_DIR}/imgui_demo.cpp
         ${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp
+        ${imgui_SOURCE_DIR}/misc/freetype/imgui_freetype.cpp
     )
+
+    CPMAddPackage("gh:freetype/freetype#0ae7e60")
 endif()
