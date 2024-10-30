@@ -22,14 +22,15 @@ private:
 	bool m_forceLegacy = false;
 	std::function<void()> m_setupCall, m_drawCall;
 	InputMode m_inputMode = InputMode::Default;
+	ImGuiMouseCursor m_lastCursor = ImGuiMouseCursor_COUNT;
 
 	float uiScale = 1.0f;
 
 	ImGuiCocos();
 
-	static void newFrame();
+	void newFrame();
 	void renderFrame() const;
-	static void legacyRenderFrame(); // uses OpenGL 2.0 for rendering, for compatibility with older devices
+	void legacyRenderFrame() const; // uses OpenGL 2.0 for rendering, for compatibility with older devices
 public:
 	ImGuiCocos(const ImGuiCocos&) = delete;
 	ImGuiCocos(ImGuiCocos&&) = delete;
