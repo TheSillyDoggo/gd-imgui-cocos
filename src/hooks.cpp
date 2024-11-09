@@ -151,7 +151,7 @@ class $modify(CCEGLView) {
 		CCEGLView::swapBuffers();
 	}
 
-	void toggleFullScreen(bool value, bool borderless) {
+	void toggleFullScreen(bool value, bool borderless, bool fix) {
 		if (!ImGuiCocos::get().isInitialized())
 			return CCEGLView::toggleFullScreen(value, borderless);
 
