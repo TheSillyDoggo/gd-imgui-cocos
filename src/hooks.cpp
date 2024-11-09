@@ -153,10 +153,10 @@ class $modify(CCEGLView) {
 
 	void toggleFullScreen(bool value, bool borderless, bool fix) {
 		if (!ImGuiCocos::get().isInitialized())
-			return CCEGLView::toggleFullScreen(value, borderless);
+			return CCEGLView::toggleFullScreen(value, borderless, fix);
 
 		ImGuiCocos::get().destroy();
-		CCEGLView::toggleFullScreen(value, borderless);
+		CCEGLView::toggleFullScreen(value, borderless, fix);
 		ImGuiCocos::get().setup();
 	}
 };
