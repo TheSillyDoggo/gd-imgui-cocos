@@ -10,9 +10,9 @@
 
 using namespace geode::prelude;
 
-$on_mod(Unloaded) {
-	ImGuiCocos::get().destroy();
-}
+// $on_mod(Unloaded) {
+// 	ImGuiCocos::get().destroy();
+// }
 
 class $modify(CCMouseDispatcher) {
 	bool dispatchScrollMSG(float y, float x) {
