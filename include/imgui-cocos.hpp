@@ -59,7 +59,10 @@ public:
 	[[nodiscard]] bool getForceLegacy() const;
 
 	[[nodiscard]] bool isInitialized() const;
-	
+
+	float getUIScale();
+	void setUIScale(float v);
+
 	static ImVec2 cocosToFrame(const cocos2d::CCPoint& pos);
 	static cocos2d::CCPoint frameToCocos(const ImVec2& pos);
 };
