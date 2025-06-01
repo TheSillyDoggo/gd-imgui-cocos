@@ -207,7 +207,7 @@ void ImGuiCocos::reload() {
 
 ImVec2 ImGuiCocos::cocosToFrame(const CCPoint& pos) {
 	auto* director = CCDirector::sharedDirector();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() * getUIScale();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
 	const auto winSize = director->getWinSize();
 
 	return {
@@ -218,7 +218,7 @@ ImVec2 ImGuiCocos::cocosToFrame(const CCPoint& pos) {
 
 CCPoint ImGuiCocos::frameToCocos(const ImVec2& pos) {
 	auto* director = CCDirector::sharedDirector();
-	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor() * getUIScale();
+	const auto frameSize = director->getOpenGLView()->getFrameSize() * geode::utils::getDisplayFactor();
 	const auto winSize = director->getWinSize();
 
 	return {
@@ -459,7 +459,7 @@ float ImGuiCocos::getUIScale()
 	return uiScale;
 }
 
-void ImGuiCocos::setUIScale(float v)Add commentMore actions
+void ImGuiCocos::setUIScale(float v)
 {
 	uiScale = v;
 }
